@@ -11,17 +11,12 @@ export default function Portfolio() {
   const [fullscreenIndex, setFullscreenIndex] = useState(null);
 
   return (
-    <div className="p-6 min-h-screen text-white text-center bg-gradient-to-b from-gray-800 to-black relative overflow-hidden">
+    <div className="p-6 min-h-screen text-white text-center bg-gradient-to-b from-gray-800 to-black relative">
       <h1 className="text-3xl font-bold mb-2">ПОРТФОЛИО</h1>
       <p className="text-gray-500 text-sm mb-6">ретушь</p>
-      <div className="grid grid-cols-2 gap-4 w-full max-w-3xl mx-auto relative z-10">
+      <div className="grid grid-cols-2 gap-4 max-w-3xl mx-auto">
         {images.map((img, index) => (
-          <ImageToggle 
-            key={index} 
-            before={img.before} 
-            after={img.after} 
-            onFullscreen={() => setFullscreenIndex(index)}
-          />
+          <ImageToggle key={index} before={img.before} after={img.after} onFullscreen={() => setFullscreenIndex(index)} />
         ))}
       </div>
       {fullscreenIndex !== null && (
@@ -39,10 +34,10 @@ export default function Portfolio() {
 function ImageToggle({ before, after, onFullscreen }) {
   const [showAfter, setShowAfter] = useState(false);
   return (
-    <div className="relative w-full h-auto aspect-[4/5] cursor-pointer border-2 border-gray-700 rounded-lg overflow-hidden" onClick={() => setShowAfter(!showAfter)}>
+    <div className="relative w-full aspect-[4/5] border-2 border-gray-700 rounded-lg overflow-hidden cursor-pointer" onClick={() => setShowAfter(!showAfter)}>
       <img src={showAfter ? after : before} alt="Before/After" className="w-full h-full object-cover transition-all duration-300" />
       <p className="absolute bottom-2 left-2 bg-black bg-opacity-50 px-3 py-1 text-sm rounded">{showAfter ? "После" : "До"}</p>
-      <button onClick={(e) => { e.stopPropagation(); onFullscreen(); }} className="absolute top-2 right-2 bg-gray-700 bg-opacity-70 text-white px-3 py-1 text-sm rounded hover:bg-gray-600">⛶</button>
+      <button onClick={(e) => { e.stopPropagation(); onFullscreen(); }} className="absolute top-2 right-2 bg-gray-700 bg-opacity-70 text-white px-3 py-1 text-sm rounded">⛶</button>
     </div>
   );
 }
